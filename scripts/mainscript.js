@@ -21,3 +21,5 @@ function showStudentList(student) {
 
   console.log(student);
 }
+
+// cleaning data for firs name - gender - house !Split them, trim, to uppercase to lowercase when applicable, declare all your variables
