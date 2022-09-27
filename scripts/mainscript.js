@@ -1,9 +1,25 @@
 "use strict";
 
+// creating the student object
+const studentObject = {
+  firstName: "",
+  lastName: "",
+  middleName: "",
+  nickName: "",
+  gender: "",
+  picture: "",
+  house: "",
+  bloodStatus: "",
+  expelled: false,
+  prefect: false,
+  inquisitor: false,
+};
+
 const urlStudentSet = "https://petlatkea.dk/2021/hogwarts/students.json";
+const urlStudentBlood = "https://petlatkea.dk/2021/hogwarts/families.json";
 
 fetch(urlStudentSet)
-  .then((res) => res.json())
+  .then((response) => response.json())
   .then((data) => handleStudentList(data));
 
 function handleStudentList(data) {
@@ -11,15 +27,25 @@ function handleStudentList(data) {
 }
 
 function showStudentList(student) {
-  const template = document.querySelector("#list-template").content;
+  const template = document.querySelector("#student-list-template").content;
   const parent = document.querySelector(".section-wrapper");
   const clone = template.cloneNode(true);
-  clone.querySelector("#student-first-name").textContent = student.fullname;
-  clone.querySelector("#student-gender").textContent = student.gender;
-  clone.querySelector("#student-house").textContent = student.house;
+  clone.querySelector("#full-student-name").textContent = student.fullname;
+
   parent.appendChild(clone);
 
   console.log(student);
 }
 
-// cleaning data for firs name - gender - house !Split them, trim, to uppercase to lowercase when applicable, declare all your variables
+// pop up click
+document.querySelector(".show-more-button").addEventListener("click", () => {
+  document
+    .querySelector(".student-details-pop-up")
+    .classList.add("student-details-pop-up-visible");
+});
+
+document.querySelector(".pop-up-close").addEventListener("click", () => {
+  document
+    .querySelector(".student-details-pop-up")
+    .classList.remove("student-details-pop-up-visible");
+});

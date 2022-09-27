@@ -6,29 +6,78 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content="noindex,nofollow" />
     <link rel="stylesheet" href="style/main.css" />
-    <title>Hacked Hogwarts</title>
+    <title>Hogwarts Class of 91'</title>
   </head>
   <body>
-    <div class="section-wrapper">
-      <template id="list-template">
-        <div class="list-wrapper" id="list-wrapper-id">
-          <h2 class="student-properties" id="student-first-name">
-            Student First Name
-          </h2>
-          <h2 class="student-properties" id="student-middle-name">
-            Student Middle Name
-          </h2>
-          <h2 class="student-properties" id="student-last-name">
-            Student Last Name
-          </h2>
-          <h2 class="student-properties" id="student-nickname">
-            Student Nickname
-          </h2>
-          <p class="student-properties" id="student-gender">Student Gender</p>
-          <p class="student-properties" id="student-house">Student House</p>
-        </div>
-      </template>
+    <div class="front-wrapper">
+      <h1 class="main-title">Hogwarts Class of 1991</h1>
+      <img src="assets/hogwarts-crest.png" alt="Crest of Hogwarts" />
     </div>
+    <section id="filter-sort-search">
+      <select name="sort" id="sort">
+        <option value="default">Sort Students</option>
+        <option value="firstName ascending">First Name A-Z</option>
+        <option value="lastName ascending">Last Name A-Z</option>
+        <option value="firstName descending">First Name Z-A</option>
+        <option value="lastName descending">Last Name Z-A</option>
+        <option value="house ascending">House A-Z</option>
+        <option value="house descending">House Z-A</option>
+      </select>
+      <select name="filter" id="filter">
+        <option value="default">Filter Students</option>
+        <option value="house Gryffindor">Show Gryffindor Students</option>
+        <option value="house Hufflepuff">Show Hufflepuff Students</option>
+        <option value="house Ravenclaw">Show Ravenclaw Students</option>
+        <option value="house Slytherin">Show Slytherin Students</option>
+        <option value="expelledStudents">Show Expelled Students</option>
+        <option value="inquisitorialSquad">
+          Show Inquisitorial Squad Students
+        </option>
+        <option value="prefectStudents">Show Prefect Students</option>
+      </select>
+      <input type="text" id="searchBar" placeholder="Search..." />
+    </section>
+
+    <main>
+      <section class="student-details-pop-up">
+        <div class="student-details-container">
+          <image class="pop-up-close" src="assets/ico-close.svg"></image>
+          <div class="student-picture">
+            <img class="student-image-pop-up" src="assets/potter_h.png" />
+          </div>
+          <div class="student-details-pop-up-text">
+            <p>First Name:</p>
+            <p>Last Name:</p>
+            <p>House:</p>
+            <p>Blood Status:</p>
+          </div>
+          <section class="pop-up-buttons-wrapper">
+            <button class="pop-up-button">Add as Prefect</button>
+            <button class="pop-up-button">Add to Inquisitorial Squad</button>
+            <button class="pop-up-button">Remove Prefect</button>
+            <button class="pop-up-button">
+              Remove from Inquisitorial Squad
+            </button>
+            <button class="pop-up-button">Expel Student</button>
+          </section>
+        </div>
+      </section>
+
+      <div class="section-wrapper">
+        <template id="student-list-template">
+          <div class="student-box-wrapper" id="student-box-wrapper">
+            <div class="student-picture"><img src="assets/potter_h.png" /></div>
+            <h2 class="student-properties" id="full-student-name">
+              Harry James Potter
+            </h2>
+            <div class="student-house">
+              <img src="assets/gryffindor-crest1.png" />
+            </div>
+            <button class="show-more-button">Show More</button>
+          </div>
+        </template>
+      </div>
+    </main>
     <script src="scripts/mainscript.js"></script>
   </body>
 </html>

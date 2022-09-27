@@ -1,3 +1,5 @@
+/* non responsive - sorry */
+
 @import url("https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300;700&display=swap");
 
 * {
@@ -9,27 +11,149 @@
 html {
   font-size: 100%;
   scroll-behavior: smooth;
-  background-color: rgb(64, 96, 165);
+  background-color: rgb(94, 70, 4);
   font-family: "Roboto Slab", serif;
 }
+
+.front-wrapper {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+.main-title {
+  color: white;
+  padding-bottom: 2rem;
+}
+
 .section-wrapper {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 4rem;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 2rem;
   max-width: 1600px;
   margin-top: 2rem;
   margin-bottom: 2rem;
   padding: 1rem;
 }
 
-.list-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.student-box-wrapper {
+  padding: 1em;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1rem;
+  border: 2px solid rgb(190, 162, 37);
 }
 
 .student-properties {
   font-size: 18px;
   color: aliceblue;
   font-weight: 700;
+}
+
+.show-more-button {
+  color: rgb(190, 162, 37);
+  border: 2px solid rgb(190, 162, 37);
+  padding: 3px;
+  background-color: rgb(94, 70, 4);
+  font-size: 16px;
+  font-family: "Roboto Slab", serif;
+}
+
+.show-more-button:hover {
+  background-color: rgb(190, 162, 37);
+  color: rgb(94, 70, 4);
+}
+
+.student-details-pop-up {
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 30;
+  top: 0;
+  display: none;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.student-details-pop-up-visible {
+  display: flex;
+  visibility: initial;
+  pointer-events: initial;
+}
+
+.student-details-pop-up .student-details-container {
+  background-color: rgb(196, 164, 78);
+  position: relative;
+  padding: 3rem;
+  gap: 1rem;
+  max-width: 90%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.student-details-pop-up .student-details-container .pop-up-close {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  width: 36px;
+  cursor: pointer;
+}
+
+.student-details-pop-up-text {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.pop-up-buttons-wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+.pop-up-button {
+  color: rgb(190, 162, 37);
+  border: 2px solid rgb(190, 162, 37);
+  padding: 3px;
+  background-color: rgb(94, 70, 4);
+  font-size: 16px;
+  font-family: "Roboto Slab", serif;
+}
+
+.pop-up-button:hover {
+  background-color: rgb(190, 162, 37);
+  color: rgb(94, 70, 4);
+}
+
+#filter-sort-search {
+  padding: 1rem;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 1.5rem;
+}
+
+#filter-sort-search select {
+  padding: 4px;
+  font-family: "Roboto Slab", serif;
+  font-weight: 600;
+  background-color: rgb(94, 70, 4);
+  color: rgb(190, 162, 37);
+  border: 1px solid rgb(255, 208, 0);
+}
+
+#filter-sort-search input {
+  padding: 4px;
+  font-family: "Roboto Slab", serif;
+  font-weight: 600;
+  background-color: rgb(94, 70, 4);
+  color: rgb(190, 162, 37);
+  border: 2px solid rgb(190, 162, 37);
+}
+
+#filter-sort-search input::placeholder {
+  color: rgb(255, 208, 0);
 }
