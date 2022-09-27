@@ -1,5 +1,3 @@
-/* non responsive - sorry */
-
 @import url("https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300;700&display=swap");
 
 * {
@@ -110,14 +108,14 @@ html {
   gap: 1rem;
 }
 
-.pop-up-buttons-wrapper {
+/* .pop-up-buttons-wrapper {
   display: flex;
   justify-content: space-between;
-}
+} */
 .pop-up-button {
   color: rgb(190, 162, 37);
   border: 2px solid rgb(190, 162, 37);
-  padding: 3px;
+  padding: 6px;
   background-color: rgb(94, 70, 4);
   font-size: 16px;
   font-family: "Roboto Slab", serif;
