@@ -27,7 +27,7 @@ html {
 
 .section-wrapper {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(375px, 1fr));
   gap: 2rem;
   max-width: 1600px;
   margin-top: 2rem;
@@ -150,4 +150,117 @@ html {
 
 #filter-sort-search input::placeholder {
   color: rgb(255, 208, 0);
+}
+
+.information-text-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  padding: 1rem;
+  gap: 4px;
+}
+.information-text-wrapper p {
+  font-family: "Roboto Slab", serif;
+  font-weight: 600;
+  background-color: rgb(94, 70, 4);
+  color: rgb(190, 162, 37);
+}
+
+.expelled-list-template {
+  color: red;
+  font-family: "Roboto Slab", serif;
+  font-weight: 600;
+  display: none;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.inquisitor-list-template {
+  color: rgb(23, 15, 183);
+  font-family: "Roboto Slab", serif;
+  font-weight: 600;
+  display: none;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.prefect-list-template {
+  color: rgb(14, 163, 177);
+  font-family: "Roboto Slab", serif;
+  font-weight: 600;
+  display: none;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.expelled-list-template-visible {
+  visibility: initial;
+  pointer-events: initial;
+}
+
+.inquisitor-list-template-visible {
+  visibility: initial;
+  pointer-events: initial;
+}
+
+.prefect-list-template-visible {
+  visibility: initial;
+  pointer-events: initial;
+}
+
+@media only screen and (max-width: 830px) {
+  .information-text-wrapper {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media only screen and (max-width: 675px) {
+  #filter-sort-search {
+    flex-direction: column;
+  }
+}
+
+.status-pop-up-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.expelled-status-pop-up {
+  color: red;
+  font-family: "Roboto Slab", serif;
+  font-weight: 600;
+  display: none;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.inquisitor-status-pop-up {
+  color: rgb(23, 15, 183);
+  font-family: "Roboto Slab", serif;
+  font-weight: 600;
+  display: none;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.prefect-status-pop-up {
+  color: rgb(14, 163, 177);
+  font-family: "Roboto Slab", serif;
+  font-weight: 600;
+  display: none;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.expelled-status-pop-up-visible {
+  visibility: initial;
+  pointer-events: initial;
+}
+
+.inquisitor-status-pop-up-visible {
+  visibility: initial;
+  pointer-events: initial;
+}
+
+.prefect-list-status-pop-up-visible {
+  visibility: initial;
+  pointer-events: initial;
 }

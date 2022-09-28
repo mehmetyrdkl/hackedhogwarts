@@ -37,6 +37,17 @@
       </select>
       <input type="text" id="searchBar" placeholder="Search..." />
     </section>
+    <section class="information-text-wrapper">
+      <p id="total-students-number">Total Students displayed:</p>
+      <p id="gryffindor-students-number">House Gryffindor Students:</p>
+      <p id="hufflepuff-students-number">House Hufflepuff Students:</p>
+      <p id="ravenclaw-students-number">House Ravenclaw Students:</p>
+      <p id="slythering-students-number">House Slytherin Students:</p>
+      <p id="total-girl-students">All Girl Students:</p>
+      <p id="total-boy-students">All Boy Students:</p>
+      <p id="total-expelled-students">All Expelled Students:</p>
+      <p id="total-active-students">All Active Students:</p>
+    </section>
 
     <main>
       <section class="student-details-pop-up">
@@ -48,14 +59,20 @@
           <div class="house-picture">
             <img
               class="house-image-pop-up"
-              src="assets/gryffindor-crest1.png"
+              src="assets/gryffindor.png"
+              alt="Gryffindor"
             />
           </div>
           <div class="student-details-pop-up-text">
-            <p>First Name: Harry</p>
-            <p>Last Name: James-Potter</p>
-            <p>House: Gryffindor</p>
-            <p>Blood Status: Half-Blood</p>
+            <p class="pop-up-first-name">First Name: Harry</p>
+            <p class="pop-up-last-name">Last Name: James-Potter</p>
+            <p class="pop-up-gender">Gender: Boy</p>
+            <p class="pop-up-blood-status">Blood Status: Half-Blood</p>
+            <div class="status-pop-up-wrapper">
+            <p class="prefect-status-pop-up" id="prefect-status">Prefect</p>
+            <p class="inquisitor-status-pop-up">Inquisitor</p>
+            <p class="expelled-status-pop-up">Expelled</p>
+            </div>
           </div>
         <section class="pop-up-buttons-wrapper">
           <button class="pop-up-button">Add as Prefect</button>
@@ -65,19 +82,22 @@
           <button class="pop-up-button">Expel Student</button>
         </section>
       </section>
-    </div>
+    
 
       <div class="section-wrapper">
         <template id="student-list-template">
-          <div class="student-box-wrapper" id="student-box-wrapper">
+          <div class="student-box-wrapper" >
             <div class="student-picture"><img src="assets/potter_h.png" /></div>
-            <h2 class="student-properties" id="full-student-name">
+            <h2 class="student-properties">
               Harry James Potter
             </h2>
             <div class="student-house">
-              <img src="assets/gryffindor-crest1.png" />
+              <img src="assets/gryffindor.png" />
             </div>
             <button class="show-more-button">Show More</button>
+            <p class="expelled-list-template">Expelled</p>
+            <p class="inquisitor-list-template">Inquisitor</p>
+            <p class="prefect-list-template">Prefect</p>
           </div>
         </template>
       </div>
