@@ -1,7 +1,7 @@
 "use strict";
 
 const studentArray = [];
-
+let bloodArray = [];
 window.addEventListener("DOMContentLoaded", init);
 
 // creating the student object
@@ -25,16 +25,23 @@ function init() {
     "https://petlatkea.dk/2021/hogwarts/students.json";
   const urlBloodRawData = "https://petlatkea.dk/2021/hogwarts/families.json";
 
-  fetch(urlStudentSetRawData)
-    .then((response) => response.json())
-    .then((data) => handleStudentList(data));
-
-  function handleStudentList(data) {
-    data.forEach(cleaningData);
-    studentArray.forEach(showStudentList);
+  async function loadData() {
+    await fetchJson(urlBloodRawData, cleanBlood);
+    fetchJson(urlStudentSetRawData, handleStudentList);
   }
+  loadData();
+}
 
-  // pop up click
+async function fetchJson(url, callback) {
+  return fetch(url)
+    .then((response) => response.json())
+    .then((data) => callback(data));
+}
+
+function handleStudentList(data) {
+  console.log("handling users");
+  data.forEach(cleaningData);
+  studentArray.forEach(showStudentList);
 }
 
 function showStudentList(student) {
@@ -61,6 +68,8 @@ function showStudentList(student) {
     document.querySelector(".house-image-pop-up").alt = student.house;
     document.querySelector(".student-picture img").src =
       "assets/" + student.image;
+    document.querySelector(".pop-up-blood-status").textContent =
+      "Blood Status: " + student.bloodStatus;
     document
       .querySelector(".student-details-pop-up")
       .classList.add("student-details-pop-up-visible");
@@ -76,7 +85,7 @@ document.querySelector(".pop-up-close").addEventListener("click", () => {
 
 // Cleaning Data
 function cleaningData(data) {
-  let firstName, lastName, middleName, nickName;
+  let firstName, lastName, middleName, nickName, bloodStatus;
   // console.log(data);
   const nameArray = data.fullname.trim().split(" ");
   const house = capitalize(data.house.trim());
@@ -98,23 +107,37 @@ function cleaningData(data) {
   middleName = capitalize(middleName);
   nickName = capitalize(nickName);
 
+  // assigning images for each cases
   let image;
 
   if (lastName === undefined) {
-    image = "/placeholder-image.png";
+    image = "./placeholder-image.png";
   } else {
     image = lastName.toLowerCase() + "_" + firstName[0].toLowerCase() + ".png";
+    if (lastName.toLowerCase().includes("patil")) {
+      if (firstName.toLowerCase().includes("padma")) {
+        image = "./patil_padma.png";
+      } else if (firstName.toLowerCase().includes("parvati")) {
+        image = "./patil_parvati.png";
+      }
+    }
+    if (lastName.includes("-")) {
+      image = `./${lastName
+        .substring(lastName.lastIndexOf("-") + 1)
+        .toLowerCase()}_${firstName.charAt(0).toLowerCase()}.png`;
+    }
   }
 
-  // name array find first name
-  // name array find middle name
-  // check if middle name !== lastname
-  // check if middle name doesnt contain quotation marks
-  // name array find nickname
-  // name array find last name
-  // capitalize all of them
-  // console.log(nameArray);
-  // console.log(lastName);
+  let pureBlood = bloodArray.pure;
+  let halfBlood = bloodArray.half;
+  if (halfBlood.includes(lastName)) {
+    bloodStatus = "HalfBlood";
+  } else if (pureBlood.includes(lastName)) {
+    bloodStatus = "Pureblood";
+  } else {
+    bloodStatus = "Muggle";
+  }
+
   let studentObj = Object.create(studentObject);
   studentObj.firstName = firstName;
   studentObj.lastName = lastName;
@@ -126,6 +149,7 @@ function cleaningData(data) {
   studentObj.expelled = false;
   studentObj.inquisitor = false;
   studentObj.prefect = false;
+  studentObj.bloodStatus = bloodStatus;
   studentArray.push(studentObj);
 }
 
@@ -148,4 +172,9 @@ function capitalize(string) {
     }
     return capitalizedString;
   }
+}
+
+function cleanBlood(data) {
+  console.log("blood handled");
+  bloodArray = data;
 }
