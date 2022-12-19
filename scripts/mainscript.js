@@ -20,6 +20,13 @@ const studentObject = {
   inquisitor: false,
 };
 
+const settings = {
+  filterBy: "all",
+  sortBy: "firstName",
+  currentCount: 0,
+  isHacked: false,
+};
+
 function init() {
   const urlStudentSetRawData =
     "https://petlatkea.dk/2021/hogwarts/students.json";
@@ -43,7 +50,24 @@ async function fetchJson(url, callback) {
 
 function handleStudentList(data) {
   data.forEach(cleaningData);
-  studentArray.forEach(showStudentList);
+  buildList();
+}
+
+function buildList() {
+  // studentArray.forEach(showStudentList);
+  const currentList = filterList(studentArray);
+  const sortedList = currentList.sort(function (a, b) {
+    return a.firstName.localeCompare(b.firstName);
+  });
+  console.log(sortedList);
+  displayList(sortedList);
+}
+
+function displayList(student) {
+  // clear the list
+  document.querySelector(".section-wrapper").innerHTML = "";
+  // build a new list
+  student.forEach(showStudentList);
 }
 
 function showStudentList(student) {
@@ -182,13 +206,83 @@ function cleanBlood(data) {
 
 // Sorting and Filtering
 function sortStudents() {
-  if (option.selected === option.value.default) {
-    showStudentList;
-  }
+  buildList();
 }
 
-function filterStudents() {
-  if (option.selected === option.value.default) {
-    showStudentList;
+function sortList(sortedList) {
+  // sortedList = sortedList.sort((a, b) => {
+  //   return a.firstName - b.firstName;
+  // });
+
+  function sortByProperty(A, B) {
+    if (A < B) {
+      return -1;
+    } else {
+      return 1;
+    }
   }
+
+  return sortedList;
 }
+
+function filterStudents(event) {
+  settings.filterBy = event.target.value;
+  buildList();
+}
+
+function filterList(filteredList) {
+  searchInput.value = "";
+  if (settings.filterBy === "Gryffindor") {
+    filteredList = studentArray.filter(isGryff);
+  } else if (settings.filterBy === "Slytherin") {
+    filteredList = studentArray.filter(isSlyth);
+  } else if (settings.filterBy === "Ravenclaw") {
+    filteredList = studentArray.filter(isRaven);
+  } else if (settings.filterBy === "Hufflepuff") {
+    filteredList = studentArray.filter(isHuffle);
+  } else if (settings.filterBy === "Expelled") {
+    filteredList = expelledStudents;
+  }
+  return filteredList;
+}
+
+function isGryff(studentArray) {
+  return studentArray.house === "Gryffindor";
+}
+function isSlyth(studentArray) {
+  return studentArray.house === "Slytherin";
+}
+function isRaven(studentArray) {
+  return studentArray.house === "Ravenclaw";
+}
+function isHuffle(studentArray) {
+  return studentArray.house === "Hufflepuff";
+}
+
+// SEARCHING
+
+const searchInput = document.getElementById("searchBar");
+
+// store name elements in array-like object
+const namesFromDOM = document.getElementsByClassName("student-properties");
+
+// listen for user events
+searchInput.addEventListener("keyup", (event) => {
+  //   const { value } = event.target;
+  // get user search input converted to lowercase
+  const searchQuery = event.target.value.toLowerCase();
+
+  for (const nameElement of namesFromDOM) {
+    // store name text and convert to lowercase
+    let name = nameElement.textContent.toLowerCase();
+
+    // compare current name to search input
+    if (name.includes(searchQuery)) {
+      // found name matching search, display it
+      nameElement.parentNode.classList.remove("hide");
+    } else {
+      // no match, don't display name
+      nameElement.parentNode.classList.add("hide");
+    }
+  }
+});

@@ -17,23 +17,19 @@
       <select name="sort" id="sort">
         <option value="default">Sort Students</option>
         <option value="firstName ascending">First Name A-Z</option>
-        <option value="lastName ascending">Last Name A-Z</option>
         <option value="firstName descending">First Name Z-A</option>
+        <option value="lastName ascending">Last Name A-Z</option>
         <option value="lastName descending">Last Name Z-A</option>
         <option value="house ascending">House A-Z</option>
         <option value="house descending">House Z-A</option>
       </select>
       <select name="filter" id="filter">
         <option value="default">Filter Students</option>
-        <option value="house Gryffindor">Show Gryffindor Students</option>
-        <option value="house Hufflepuff">Show Hufflepuff Students</option>
-        <option value="house Ravenclaw">Show Ravenclaw Students</option>
-        <option value="house Slytherin">Show Slytherin Students</option>
+        <option value="Gryffindor">Show Gryffindor Students</option>
+        <option value="Hufflepuff">Show Hufflepuff Students</option>
+        <option value="Ravenclaw">Show Ravenclaw Students</option>
+        <option value="Slytherin">Show Slytherin Students</option>
         <option value="expelledStudents">Show Expelled Students</option>
-        <option value="inquisitorialSquad">
-          Show Inquisitorial Squad Students
-        </option>
-        <option value="prefectStudents">Show Prefect Students</option>
       </select>
       <input type="text" id="searchBar" placeholder="Search..." />
     </section>
@@ -85,7 +81,10 @@
     
 
       <div class="section-wrapper">
-        <template id="student-list-template">
+        
+      </div>
+
+      <template id="student-list-template">
           <div class="student-box-wrapper" >
             <div class="student-picture"><img src="assets/potter_h.png" /></div>
             <h2 class="student-properties">
@@ -100,7 +99,6 @@
             <p class="prefect-list-template">Prefect</p>
           </div>
         </template>
-      </div>
     </main>
     <script src="scripts/mainscript.js"></script>
   </body>

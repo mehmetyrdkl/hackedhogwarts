@@ -264,3 +264,7 @@ html {
   visibility: initial;
   pointer-events: initial;
 }
+
+.hide {
+  display: none;
+}
