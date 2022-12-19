@@ -30,6 +30,9 @@ function init() {
     fetchJson(urlStudentSetRawData, handleStudentList);
   }
   loadData();
+  // GLOBAL EVENT LISTENERS
+  document.querySelector("#sort").addEventListener("change", sortStudents);
+  document.querySelector("#filter").addEventListener("change", filterStudents);
 }
 
 async function fetchJson(url, callback) {
@@ -39,7 +42,6 @@ async function fetchJson(url, callback) {
 }
 
 function handleStudentList(data) {
-  console.log("handling users");
   data.forEach(cleaningData);
   studentArray.forEach(showStudentList);
 }
@@ -86,7 +88,7 @@ document.querySelector(".pop-up-close").addEventListener("click", () => {
 // Cleaning Data
 function cleaningData(data) {
   let firstName, lastName, middleName, nickName, bloodStatus;
-  // console.log(data);
+
   const nameArray = data.fullname.trim().split(" ");
   const house = capitalize(data.house.trim());
   const gender = capitalize(data.gender.trim());
@@ -175,6 +177,18 @@ function capitalize(string) {
 }
 
 function cleanBlood(data) {
-  console.log("blood handled");
   bloodArray = data;
+}
+
+// Sorting and Filtering
+function sortStudents() {
+  if (option.selected === option.value.default) {
+    showStudentList;
+  }
+}
+
+function filterStudents() {
+  if (option.selected === option.value.default) {
+    showStudentList;
+  }
 }
