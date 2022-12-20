@@ -58,6 +58,7 @@ function buildList() {
   const currentList = filterList(studentArray);
   const sortedList = sortList(currentList);
   displayList(sortedList);
+  showCount();
 }
 
 function displayList(student) {
@@ -83,6 +84,30 @@ function showStudentList(student) {
     clone.querySelector(
       ".student-properties"
     ).textContent = `${student.firstName}  ${student.lastName} `;
+  }
+  // PREF
+
+  if (student.prefect) {
+    clone
+      .querySelector(".prefect-list-template")
+      .classList.add("prefect-list-template-visible");
+  } else if (student.prefect === false) {
+    clone
+      .querySelector(".prefect-list-template")
+      .classList.remove("prefect-list-template-visible");
+  }
+
+  // INQ
+
+  if (student.inquisitor) {
+    clone
+      .querySelector(".inquisitor-list-template")
+      .classList.add("inquisitor-list-template-visible");
+  } else if (student.inquisitor === false) {
+    // console.log(student.inquisitor);
+    clone
+      .querySelector(".inquisitor-list-template")
+      .classList.remove("inquisitor-list-template-visible");
   }
 
   clone.querySelector(".student-house img").src =
@@ -110,7 +135,31 @@ function showStudentList(student) {
     document
       .querySelector(".expellStudent")
       .addEventListener("click", clickExpell);
+
+    document.querySelector(".setInq").addEventListener("click", clickInquis);
+    document.querySelector(".setPref").addEventListener("click", clickPrefect);
+
+    function clickInquis() {
+      if (student.inquisitor === true) {
+        student.inquisitor = false;
+      } else {
+        student.inquisitor = makeInquis(student);
+      }
+      buildList();
+    }
+
+    function clickPrefect() {
+      if (student.prefect === true) {
+        student.prefect = false;
+      } else {
+        makePrefect(student);
+      }
+
+      buildList();
+    }
   });
+
+  // Expelling student
 
   function clickExpell() {
     if (student.expelled === false) {
@@ -125,7 +174,37 @@ function showStudentList(student) {
   function expellStudent(selectedStudent) {
     expelledStudents.push(selectedStudent);
     studentArray = studentArray.filter((student) => student.expelled === false);
-    console.log(expelledStudents);
+  }
+
+  function makeInquis(selectedStudent) {
+    if (selectedStudent.house === "Slytherin") {
+      return true;
+    } else if (selectedStudent.bloodStatus === "pure") {
+      return true;
+    } else {
+      alert("This student is not a pureblood Slytherin");
+      return false;
+    }
+  }
+
+  function makePrefect(selectedStudent) {
+    const prefectMembers = studentArray.filter((student) => student.prefect);
+    // console.log("prefectMembers", prefectMembers);
+    const prefectsOfHouse = prefectMembers.filter(
+      (student) => student.house === selectedStudent.house
+    );
+    // console.log("prefectsOfHouse", prefectsOfHouse);
+
+    if (prefectsOfHouse.length < 2) {
+      // console.log(`number of prefects is: ${prefectsOfHouse.length}`);
+      selectedStudent.prefect = true;
+    } else {
+      // console.log("too many prefects")
+      alert("You have too many prefects per house");
+
+      // removeAorB(prefectsOfHouse[0], prefectsOfHouse[1]);
+      // selectedStudent.prefect = false;
+    }
   }
 
   parent.appendChild(clone);
@@ -337,3 +416,45 @@ searchInput.addEventListener("keyup", (event) => {
     }
   }
 });
+
+function showCount() {
+  const gryffindorStudents = studentArray.filter(
+    (obj) => obj.house === "Gryffindor"
+  ).length;
+  document.querySelector(
+    "#gryffindor-students-number"
+  ).textContent = `House Gryffindor Students:${gryffindorStudents}`;
+
+  const slytherinStudents = studentArray.filter(
+    (obj) => obj.house === "Slytherin"
+  ).length;
+  document.querySelector(
+    "#slytherin-students-number"
+  ).textContent = `House Slytherin Students: ${slytherinStudents}`;
+
+  const ravenclawStudents = studentArray.filter(
+    (obj) => obj.house === "Ravenclaw"
+  ).length;
+  document.querySelector(
+    "#ravenclaw-students-number"
+  ).textContent = `House Ravenclaw Students: ${ravenclawStudents}`;
+
+  const hufflepuffStudents = studentArray.filter(
+    (obj) => obj.house === "Hufflepuff"
+  ).length;
+  document.querySelector(
+    "#hufflepuff-students-number"
+  ).textContent = `House Hufflepuff Students: ${hufflepuffStudents}`;
+
+  document.querySelector(
+    "#total-students-number"
+  ).textContent = `Total Students displayed: ${studentArray.length}`;
+
+  document.querySelector(
+    "#total-expelled-students"
+  ).textContent = `Expelled students ${expelledStudents.length}`;
+
+  document.querySelector(
+    "#total-active-students"
+  ).textContent = `Active students: ${34 - expelledStudents.length}`;
+}

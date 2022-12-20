@@ -175,7 +175,7 @@ html {
 }
 
 .inquisitor-list-template {
-  color: rgb(23, 15, 183);
+  color: rgb(22, 209, 116);
   font-family: "Roboto Slab", serif;
   font-weight: 600;
   display: none;
@@ -201,11 +201,13 @@ html {
 .inquisitor-list-template-visible {
   visibility: initial;
   pointer-events: initial;
+  display: flex;
 }
 
 .prefect-list-template-visible {
   visibility: initial;
   pointer-events: initial;
+  display: flex;
 }
 
 @media only screen and (max-width: 830px) {
