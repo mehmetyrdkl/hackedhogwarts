@@ -16,12 +16,12 @@
     <section id="filter-sort-search">
       <select name="sort" id="sort">
         <option value="default">Sort Students</option>
-        <option value="firstName ascending">First Name A-Z</option>
-        <option value="firstName descending">First Name Z-A</option>
-        <option value="lastName ascending">Last Name A-Z</option>
-        <option value="lastName descending">Last Name Z-A</option>
-        <option value="house ascending">House A-Z</option>
-        <option value="house descending">House Z-A</option>
+        <option value="firstName-ascending">First Name A-Z</option>
+        <option value="firstName-descending">First Name Z-A</option>
+        <option value="lastName-ascending">Last Name A-Z</option>
+        <option value="lastName-descending">Last Name Z-A</option>
+        <option value="house-ascending">House A-Z</option>
+        <option value="house-descending">House Z-A</option>
       </select>
       <select name="filter" id="filter">
         <option value="default">Filter Students</option>
@@ -65,40 +65,38 @@
             <p class="pop-up-gender">Gender: Boy</p>
             <p class="pop-up-blood-status">Blood Status: Half-Blood</p>
             <div class="status-pop-up-wrapper">
-            <p class="prefect-status-pop-up" id="prefect-status">Prefect</p>
-            <p class="inquisitor-status-pop-up">Inquisitor</p>
-            <p class="expelled-status-pop-up">Expelled</p>
+              <p class="prefect-status-pop-up" id="prefect-status">Prefect</p>
+              <p class="inquisitor-status-pop-up">Inquisitor</p>
+              <p class="expelled-status-pop-up">Expelled</p>
             </div>
           </div>
-        <section class="pop-up-buttons-wrapper">
-          <button class="pop-up-button">Add as Prefect</button>
-          <button class="pop-up-button">Add to Inquisitorial Squad</button>
-          <button class="pop-up-button">Remove Prefect</button>
-          <button class="pop-up-button">Remove from Inquisitorial Squad</button>
-          <button class="pop-up-button">Expel Student</button>
-        </section>
+          <section class="pop-up-buttons-wrapper">
+            <button class="pop-up-button">Add as Prefect</button>
+            <button class="pop-up-button">Add to Inquisitorial Squad</button>
+            <button class="pop-up-button">Remove Prefect</button>
+            <button class="pop-up-button">
+              Remove from Inquisitorial Squad
+            </button>
+            <button class="pop-up-button">Expel Student</button>
+          </section>
+        </div>
       </section>
-    
 
-      <div class="section-wrapper">
-        
-      </div>
+      <div class="section-wrapper"></div>
 
       <template id="student-list-template">
-          <div class="student-box-wrapper" >
-            <div class="student-picture"><img src="assets/potter_h.png" /></div>
-            <h2 class="student-properties">
-              Harry James Potter
-            </h2>
-            <div class="student-house">
-              <img src="assets/gryffindor.png" />
-            </div>
-            <button class="show-more-button">Show More</button>
-            <p class="expelled-list-template">Expelled</p>
-            <p class="inquisitor-list-template">Inquisitor</p>
-            <p class="prefect-list-template">Prefect</p>
+        <div class="student-box-wrapper">
+          <div class="student-picture"><img src="assets/potter_h.png" /></div>
+          <h2 class="student-properties">Harry James Potter</h2>
+          <div class="student-house">
+            <img src="assets/gryffindor.png" />
           </div>
-        </template>
+          <button class="show-more-button">Show More</button>
+          <p class="expelled-list-template">Expelled</p>
+          <p class="inquisitor-list-template">Inquisitor</p>
+          <p class="prefect-list-template">Prefect</p>
+        </div>
+      </template>
     </main>
     <script src="scripts/mainscript.js"></script>
   </body>

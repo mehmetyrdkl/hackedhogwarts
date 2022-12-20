@@ -56,10 +56,7 @@ function handleStudentList(data) {
 function buildList() {
   // studentArray.forEach(showStudentList);
   const currentList = filterList(studentArray);
-  const sortedList = currentList.sort(function (a, b) {
-    return a.firstName.localeCompare(b.firstName);
-  });
-  console.log(sortedList);
+  const sortedList = sortList(currentList);
   displayList(sortedList);
 }
 
@@ -137,6 +134,7 @@ function cleaningData(data) {
   let image;
 
   if (lastName === undefined) {
+    lastName = "";
     image = "./placeholder-image.png";
   } else {
     image = lastName.toLowerCase() + "_" + firstName[0].toLowerCase() + ".png";
@@ -205,21 +203,40 @@ function cleanBlood(data) {
 }
 
 // Sorting and Filtering
-function sortStudents() {
+function sortStudents(event) {
+  settings.sortBy = event.target.value;
   buildList();
 }
 
 function sortList(sortedList) {
-  // sortedList = sortedList.sort((a, b) => {
-  //   return a.firstName - b.firstName;
-  // });
-
-  function sortByProperty(A, B) {
-    if (A < B) {
-      return -1;
-    } else {
-      return 1;
-    }
+  searchInput.value = "";
+  console.log(studentArray);
+  if (settings.sortBy === "firstName-ascending") {
+    sortedList.sort(function (a, b) {
+      return a.firstName.localeCompare(b.firstName);
+    });
+  } else if (settings.sortBy === "firstName-descending") {
+    sortedList.sort(function (a, b) {
+      return b.firstName.localeCompare(a.firstName);
+    });
+  } else if (settings.sortBy === "lastName-ascending") {
+    sortedList.sort(function (a, b) {
+      return a.lastName.localeCompare(b.lastName);
+    });
+  } else if (settings.sortBy === "lastName-descending") {
+    sortedList.sort(function (a, b) {
+      return b.lastName.localeCompare(a.lastName);
+    });
+  } else if (settings.sortBy === "house-ascending") {
+    sortedList.sort(function (a, b) {
+      return a.house.localeCompare(b.house);
+    });
+  } else if (settings.sortBy === "house-descending") {
+    sortedList.sort(function (a, b) {
+      return b.house.localeCompare(a.house);
+    });
+  } else if (settings.sortBy === "default") {
+    return studentArray;
   }
 
   return sortedList;
@@ -242,7 +259,10 @@ function filterList(filteredList) {
     filteredList = studentArray.filter(isHuffle);
   } else if (settings.filterBy === "Expelled") {
     filteredList = expelledStudents;
+  } else {
+    return filteredList;
   }
+
   return filteredList;
 }
 
