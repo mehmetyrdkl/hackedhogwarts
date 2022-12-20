@@ -1,7 +1,8 @@
 "use strict";
 
-const studentArray = [];
+let studentArray = [];
 let bloodArray = [];
+let expelledStudents = [];
 window.addEventListener("DOMContentLoaded", init);
 
 // creating the student object
@@ -54,7 +55,6 @@ function handleStudentList(data) {
 }
 
 function buildList() {
-  // studentArray.forEach(showStudentList);
   const currentList = filterList(studentArray);
   const sortedList = sortList(currentList);
   displayList(sortedList);
@@ -71,9 +71,20 @@ function showStudentList(student) {
   const template = document.querySelector("#student-list-template").content;
   const parent = document.querySelector(".section-wrapper");
   const clone = template.cloneNode(true);
-  clone.querySelector(
-    ".student-properties"
-  ).textContent = `${student.firstName}  ${student.lastName} `;
+
+  if (student.expelled) {
+    clone.querySelector(
+      ".student-properties"
+    ).textContent = `${student.firstName}  ${student.lastName} `;
+    clone
+      .querySelector(".expelled-list-template")
+      .classList.add("expelled-list-template-visible");
+  } else {
+    clone.querySelector(
+      ".student-properties"
+    ).textContent = `${student.firstName}  ${student.lastName} `;
+  }
+
   clone.querySelector(".student-house img").src =
     "assets/" + student.house.toLowerCase() + ".png";
   clone.querySelector(".student-picture img").src = "assets/" + student.image;
@@ -96,10 +107,30 @@ function showStudentList(student) {
     document
       .querySelector(".student-details-pop-up")
       .classList.add("student-details-pop-up-visible");
+    document
+      .querySelector(".expellStudent")
+      .addEventListener("click", clickExpell);
   });
+
+  function clickExpell() {
+    if (student.expelled === false) {
+      student.expelled = true;
+
+      expellStudent(student);
+    }
+
+    buildList();
+  }
+
+  function expellStudent(selectedStudent) {
+    expelledStudents.push(selectedStudent);
+    studentArray = studentArray.filter((student) => student.expelled === false);
+    console.log(expelledStudents);
+  }
 
   parent.appendChild(clone);
 }
+
 document.querySelector(".pop-up-close").addEventListener("click", () => {
   document
     .querySelector(".student-details-pop-up")
@@ -210,7 +241,7 @@ function sortStudents(event) {
 
 function sortList(sortedList) {
   searchInput.value = "";
-  console.log(studentArray);
+  // console.log(studentArray);
   if (settings.sortBy === "firstName-ascending") {
     sortedList.sort(function (a, b) {
       return a.firstName.localeCompare(b.firstName);
@@ -257,7 +288,7 @@ function filterList(filteredList) {
     filteredList = studentArray.filter(isRaven);
   } else if (settings.filterBy === "Hufflepuff") {
     filteredList = studentArray.filter(isHuffle);
-  } else if (settings.filterBy === "Expelled") {
+  } else if (settings.filterBy === "expelledStudents") {
     filteredList = expelledStudents;
   } else {
     return filteredList;

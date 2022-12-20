@@ -195,6 +195,7 @@ html {
 .expelled-list-template-visible {
   visibility: initial;
   pointer-events: initial;
+  display: flex;
 }
 
 .inquisitor-list-template-visible {
