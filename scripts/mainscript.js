@@ -413,6 +413,15 @@ searchInput.addEventListener("keyup", (event) => {
   // get user search input converted to lowercase
   const searchQuery = event.target.value.toLowerCase();
 
+  if (document.querySelector("#searchBar").value === "") {
+    document.querySelector(
+      "#current-students-displaying"
+    ).textContent = `Currently displaying: ${settings.currentCount} students`;
+  }
+  // Student count
+
+  let count = 0;
+
   for (const nameElement of namesFromDOM) {
     // store name text and convert to lowercase
     let name = nameElement.textContent.toLowerCase();
@@ -424,6 +433,15 @@ searchInput.addEventListener("keyup", (event) => {
     } else {
       // no match, don't display name
       nameElement.parentNode.classList.add("hide");
+
+      if (nameElement.parentNode.classList.contains("hide")) {
+        count++;
+        document.querySelector(
+          "#current-students-displaying"
+        ).textContent = `Currently displaying: ${
+          settings.currentCount - count
+        } students`;
+      }
     }
   }
 });
