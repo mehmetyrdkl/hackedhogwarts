@@ -358,6 +358,13 @@ function filterStudents(event) {
 }
 
 function filterList(filteredList) {
+  settings.currentCount = studentArray.filter(
+    (obj) => obj.house === settings.filterBy
+  ).length;
+  document.querySelector(
+    "#current-students-displaying"
+  ).textContent = `Currently displaying: ${settings.currentCount}`;
+
   searchInput.value = "";
   if (settings.filterBy === "Gryffindor") {
     filteredList = studentArray.filter(isGryff);
@@ -370,7 +377,11 @@ function filterList(filteredList) {
   } else if (settings.filterBy === "expelledStudents") {
     filteredList = expelledStudents;
   } else {
-    return filteredList;
+    filteredList = studentArray;
+    settings.currentCount = studentArray.length;
+    document.querySelector(
+      "#current-students-displaying"
+    ).textContent = `Currently displaying: ${studentArray.length}`;
   }
 
   return filteredList;
